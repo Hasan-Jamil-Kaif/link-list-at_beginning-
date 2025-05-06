@@ -1,13 +1,14 @@
-# link-list-at_beginning-
+//link-list-at_beginning-
 #include <stdio.h>
 #include <stdlib.h>
 
-
+// Define the structure for a node in the linked list
 struct Node {
     int data;
     struct Node* next;
 };
 
+// Function to insert a new node at the beginning of the list
 void at_beginning(struct Node** head, int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     if (newNode == NULL) {
@@ -18,6 +19,8 @@ void at_beginning(struct Node** head, int value) {
     newNode->next = *head;
     *head = newNode;
 }
+
+// Function to traverse and print the linked list
 void linklistTraversal(struct Node* ptr) {
     while (ptr != NULL) {
         printf("%d -> ", ptr->data);
@@ -32,7 +35,7 @@ int main() {
     struct Node* newNode = NULL;
     int n, data;
 
-
+    // Prompt user for the number of nodes
     printf("Enter the number of nodes: ");
     scanf("%d", &n);
 
@@ -41,7 +44,7 @@ int main() {
         return 1;
     }
 
-
+    // Create the first node
     head = (struct Node*)malloc(sizeof(struct Node));
     if (head == NULL) {
         printf("Memory allocation failed. Exiting...\n");
@@ -53,6 +56,7 @@ int main() {
     head->next = NULL;
     temp = head;
 
+    // Create the remaining nodes
     for (int i = 2; i <= n; i++) {
         newNode = (struct Node*)malloc(sizeof(struct Node));
         if (newNode == NULL) {
@@ -68,20 +72,21 @@ int main() {
         temp = newNode;
     }
 
+    // Display the original linked list
     printf("\nOriginal linked list:\n");
     linklistTraversal(head);
 
+    // Insert a new node at the beginning
     int newValue;
     printf("\nEnter a value to insert at the beginning: ");
     scanf("%d", &newValue);
-
     at_beginning(&head, newValue);
 
-
+    // Display the linked list after insertion
     printf("\nLinked list after insertion:\n");
     linklistTraversal(head);
 
-
+    // Free the allocated memory
     temp = head;
     while (temp != NULL) {
         struct Node* nextNode = temp->next;
